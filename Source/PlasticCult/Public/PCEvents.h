@@ -8,6 +8,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlasticDelegate_OnAddResource, int32, Amount);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDialogueDelegate_OnNotificationHappens, FString, NotificationId);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDialogueDelegate_OnNotificationClosed, FString, NotificationId);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class PLASTICCULT_API UPCEvents : public UActorComponent
@@ -23,4 +24,7 @@ public:
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Arena Events")
 	FDialogueDelegate_OnNotificationHappens OnNotificationHappens;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Arena Events")
+	FDialogueDelegate_OnNotificationClosed OnNotificationClosed;
 };
