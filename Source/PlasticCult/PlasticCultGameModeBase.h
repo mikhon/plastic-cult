@@ -6,12 +6,11 @@
 #include "GameFramework/GameModeBase.h"
 #include "PlasticCultGameModeBase.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class PLASTICCULT_API APlasticCultGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	APlasticCultGameModeBase();
 };
