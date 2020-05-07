@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "PCPawn.h"
@@ -35,8 +35,8 @@ void APCPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void APCPawn::CalcCamera(float DeltaTime, struct FMinimalViewInfo& OutResult)
 {
 	Super::CalcCamera(DeltaTime, OutResult);
-	OutResult.Rotation = FRotator(0.0f, 0.0f, 0.0f);
-	OutResult.Location = FVector(130.0f, -50.0f, 80.0f);
+	OutResult.Rotation = FRotator(-30.0f, 0.0f, 0.0f);
+	OutResult.Location = FVector(-120.0f, -20.0f, 360.0f);
 	//OutResult.DesiredFOV
 }
 
