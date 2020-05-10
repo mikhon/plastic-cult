@@ -8,6 +8,7 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FPlasticDelegate_OnInitResourcesBar, int32, StartAmount, int32, MaxAmount);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlasticDelegate_OnAddResource, int32, Amount);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlasticDelegate_OnUpdateResourceBar, int32, CurrentAmount);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDialogueDelegate_OnNotificationHappens, FString, NotificationId);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FDialogueDelegate_OnNotificationClosed, FString, NotificationId);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FPlasticDelegate_OnWorkerDies, int32, WorkerId);
@@ -26,6 +27,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Arena Events")
 	FPlasticDelegate_OnAddResource OnAddResource;
+
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Arena Events")
+	FPlasticDelegate_OnUpdateResourceBar OnUpdateResourceBar;
 
 	UPROPERTY(BlueprintAssignable, BlueprintCallable, Category = "Arena Events")
 	FDialogueDelegate_OnNotificationHappens OnNotificationHappens;

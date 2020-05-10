@@ -22,13 +22,25 @@ protected:
 	FTimerHandle WorkingTimerHandle;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Worker)
+	int32 WorkerId;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Worker)
 	int32 ProductionPerSecond;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Worker)
 	bool IsDead;
 
+	void InitEvents();
 	void StartTimer();
 	void IncreaseAwareness();
-	void Die();
+
+	UFUNCTION()
+	void Die(int32 DyingWorkerId);
+
+	UFUNCTION()
+	void NotificationHappens(FString NotificationId);
+
+	UFUNCTION()
+	void NotificationCloses(FString NotificationId);
 
 };

@@ -8,7 +8,8 @@
 // Sets default values
 APCWorker::APCWorker()
 {
-	ProductionPerSecond = 1;
+	WorkerId = 0;
+	ProductionPerSecond = 2;
 	IsDead = false;
 }
 
@@ -16,10 +17,20 @@ APCWorker::APCWorker()
 void APCWorker::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	if (!IsDead) 
+
+	InitEvents();
+}
+
+void APCWorker::InitEvents()
+{
+	UPCGameInstance* PCGameInstance = Cast<UPCGameInstance>(GetGameInstance());
+	if (PCGameInstance)
 	{
-		StartTimer();
+		if (PCGameInstance->PCEvents != nullptr)
+		{
+			PCGameInstance->PCEvents->OnWorkerDies.AddDynamic(this, &APCWorker::Die);
+			PCGameInstance->PCEvents->OnNotificationHappens.AddDynamic(this, &APCWorker::NotificationHappens);
+		}
 	}
 }
 
@@ -30,6 +41,10 @@ void APCWorker::StartTimer()
 
 void APCWorker::IncreaseAwareness()
 {
+	if (IsDead)
+	{
+		return;
+	}
 	UPCGameInstance* PCGameInstance = Cast<UPCGameInstance>(GetGameInstance());
 	if (PCGameInstance)
 	{
@@ -40,9 +55,36 @@ void APCWorker::IncreaseAwareness()
 	}
 }
 
-void APCWorker::Die()
+void APCWorker::Die(int32 DyingWorkerId)
 {
-	IsDead = true;
-	GetWorldTimerManager().ClearTimer(WorkingTimerHandle);
+	if (DyingWorkerId == WorkerId) 
+	{
+		UE_LOG(LogTemp, Log, TEXT("I died: %d"), WorkerId);
+		IsDead = true;
+		ProductionPerSecond = 0;
+		GetWorldTimerManager().ClearTimer(WorkingTimerHandle);
+	}
 }
 
+void APCWorker::NotificationHappens(FString NotificationId)
+{
+	if (NotificationId.Equals(TEXT("StartGame"))) 
+	{
+		if (!IsDead)
+		{
+			StartTimer();
+		}
+	}
+	else
+	{
+		GetWorldTimerManager().ClearTimer(WorkingTimerHandle);
+	}
+}
+
+void APCWorker::NotificationCloses(FString NotificationId)
+{
+	if (!IsDead)
+	{
+		StartTimer();
+	}
+}
