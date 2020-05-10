@@ -35,8 +35,8 @@ void APCPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void APCPawn::CalcCamera(float DeltaTime, struct FMinimalViewInfo& OutResult)
 {
 	Super::CalcCamera(DeltaTime, OutResult);
-	OutResult.Rotation = FRotator(-36.2f, 0.0f, -16.6f);
-	OutResult.Location = FVector(-163.1f, 32.0f, 398.6f);
+	OutResult.Rotation = FRotator(-36.2f, 5.0f, -16.6f);
+	OutResult.Location = FVector(-200.1f, -100.0f, 398.6f);
 	//OutResult.DesiredFOV
 }
 

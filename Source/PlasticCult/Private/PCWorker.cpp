@@ -62,6 +62,7 @@ void APCWorker::Die(int32 DyingWorkerId)
 		UE_LOG(LogTemp, Log, TEXT("I died: %d"), WorkerId);
 		IsDead = true;
 		ProductionPerSecond = 0;
+		DieEffect();
 		GetWorldTimerManager().ClearTimer(WorkingTimerHandle);
 	}
 }

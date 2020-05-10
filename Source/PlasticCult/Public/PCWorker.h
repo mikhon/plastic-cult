@@ -43,4 +43,7 @@ protected:
 	UFUNCTION()
 	void NotificationCloses(FString NotificationId);
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Worker")
+	void DieEffect();
+
 };
